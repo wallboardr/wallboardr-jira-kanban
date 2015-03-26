@@ -1,0 +1,22 @@
+{
+  "name": "wallboardr-jira-kanban",
+  "version": "0.1.0",
+  "description": "Provides JIRA support to show a Kanban workboard on Wallboardr",
+  "main": "admin.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "mercurial",
+    "url": "https://bitbucket.org/colinbate/wallboardr-jira-kanban"
+  },
+  "keywords": [
+    "wallboardr",
+    "screen",
+    "jira",
+    "kanban",
+    "workboard"
+  ],
+  "author": "Colin Bate <colin@colinbate.com>",
+  "license": "MIT"
+}
