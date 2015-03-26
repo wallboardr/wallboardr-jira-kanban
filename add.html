@@ -1,0 +1,25 @@
+<div ng-controller="JiraKanbanController">
+  <div class="form-panel" ng-show="showStep(0)">
+    <input type="url" ng-model="newScreenForm.data.url" placeholder="Jira URL" required>
+    <input type="text" ng-model="newScreenForm.data.username" placeholder="Jira username">
+    <input type="password" ng-model="newScreenForm.data.password" placeholder="Jira password">
+    <input type="text" ng-model="newScreenForm.data.filterId" placeholder="Jira Filter ID" required>
+    <input type="text" ng-model="columnCount" placeholder="Number of columns" required>
+    <div class="buttons">
+      <button ng-click="showColumns(newScreenForm)" class="success">Next</button>
+      <button ng-click="cancelAddScreen()" class="cancel">Cancel</button>
+    </div>
+  </div>
+  <div class="form-panel" ng-show="showStep(1)">
+    <div class="columns">
+      <div class="column" ng-repeat="col in columns"><input type="text" ng-model="col.statuses" placeholder="Statuses eg. In Progress, Done">
+      <input type="text" ng-model="col.min" placeholder="Min cards">
+      <input type="text" ng-model="col.max" placeholder="Max cards"></div>
+    </div>
+    <div class="buttons">
+      <button ng-click="reset()" class="success">&lt; Prev</button>
+      <button ng-click="saveColumns(newScreenForm)" class="success">Add</button>
+      <button ng-click="cancelAddScreen()" class="cancel">Cancel</button>
+    </div>
+  </div>
+</div>

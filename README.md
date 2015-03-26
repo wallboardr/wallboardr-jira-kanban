@@ -1,0 +1,1 @@
+Provides JIRA integration to display a Kanban workboard on Wallboardr.

@@ -1,0 +1,9 @@
+<div>
+<strong><em>Jira Kanban Workboard</em></strong><br>
+Server: {{activeScreen.data.url}}<br>
+Filter: {{activeScreen.data.filterId}}<br>
+Columns:
+<ul>
+  <li ng-repeat="col in activeScreen.data.columns">{{col}}</li>
+</ul>
+</div>
