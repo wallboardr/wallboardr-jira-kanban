@@ -6,6 +6,12 @@
 			{{#cards}}
 				<li class="kanban-card">
 					<h3>{{summary}}</h3>
+					{{#assignee}}
+					<div class="user">
+						<img src="{{userIcon}}">
+						<span>{{assignee}}</span>
+					</div>
+					{{/assignee}}
 				</li>
 			{{/cards}}
 			</ul>
