@@ -34,7 +34,10 @@ define(['jquery', 'boards/data-loader', 'require', './admin', './jira-api'], fun
       getCard = function (issue) {
         var card = {};
         card.summary = issue.fields.summary;
-
+        if (issue.fields.assignee) {
+          card.userIcon = issue.fields.assignee.avatarUrls['48x48'];
+          card.assignee = issue.fields.assignee.displayName.split(' ')[0];
+        }
         return card;
       },
       addToCorrectColumn = function (issue, columns) {
