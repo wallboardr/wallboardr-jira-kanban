@@ -1,10 +1,10 @@
 <div class="jira-kanban-screen">
-	<div class="jira-kanban-board column-count-{{columnCount}}" id="filter-{{filterId}}">
+	<div class="jira-kanban-board column-count-{{columnCount}} clearfix" id="filter-{{filterId}}">
 		{{#columns}}
 		<div class="jira-kanban-column {{status}}">
 			<ul>
 			{{#cards}}
-				<li>
+				<li class="kanban-card">
 					<h3>{{summary}}</h3>
 				</li>
 			{{/cards}}

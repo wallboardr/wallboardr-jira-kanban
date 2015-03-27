@@ -3,5 +3,32 @@
   margin-right: 0;
   margin-left: 0;
   font-size: 48px;
+
+  .jira-kanban-board {
+  	height: 100%;
+  }
   
+  .jira-kanban-column {
+  	margin: 0;
+  	padding: 0;
+  	float: left;
+  	height: 100%;
+  	background-color: #444;
+  }
+
+  .jira-kanban-board.column-count-3 .jira-kanban-column {
+  	width: 33%;
+  }
+
+
+  .kanban-card {
+  	background-color: @color-base-page;
+  	color: @color-content-dark;
+  	padding: 0.5em;
+  	margin: 0.25em 0;
+
+  	h3 {
+  		font-weight: normal;
+  	}
+  }
 }
