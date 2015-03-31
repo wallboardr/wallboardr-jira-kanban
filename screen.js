@@ -84,7 +84,7 @@ define(['jquery', 'boards/data-loader', 'require', './admin', './jira-api'], fun
         initApi(url);
         return jiraApi.useFilter(data.filterId).then(function (issues) {
           var rr;
-          for (rr = 0; rr < mydata.columns; rr += 1) {
+          for (rr = 0; rr < mydata.columns.length; rr += 1) {
             mydata.columns[rr].cards = [];
           }
           for (rr = 0; rr < issues.length; rr += 1) {
