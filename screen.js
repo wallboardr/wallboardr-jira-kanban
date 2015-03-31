@@ -47,9 +47,6 @@ define(['jquery', 'boards/data-loader', 'require', './admin', './jira-api'], fun
         var ii, card = getCard(issue, data);
         for (ii = 0; ii < columns.length; ii += 1) {
           if (issue.fields.status.name === columns[ii].statuses) {
-            if (!columns[ii].cards) {
-              columns[ii].cards = [];
-            }
             columns[ii].cards.push(card);
             break;
           }
@@ -58,12 +55,9 @@ define(['jquery', 'boards/data-loader', 'require', './admin', './jira-api'], fun
       checkLimits = function (mydata) {
         var rr, cc, imax, imin;
         for (rr = 0; rr < mydata.columns.length; rr += 1) {
-          cc = 0;
+          cc = mydata.columns[rr].cards.length;
           imax = parseInt(mydata.columns[rr].max, 10);
           imin = parseInt(mydata.columns[rr].min, 10);
-          if (mydata.columns[rr].cards) {
-            cc = mydata.columns[rr].cards.length;
-          }
           if (imax === imax && cc > imax) {
             mydata.columns[rr].status = 'violate-max';
             continue;
@@ -90,6 +84,9 @@ define(['jquery', 'boards/data-loader', 'require', './admin', './jira-api'], fun
         initApi(url);
         return jiraApi.useFilter(data.filterId).then(function (issues) {
           var rr;
+          for (rr = 0; rr < mydata.columns; rr += 1) {
+            mydata.columns[rr].cards = [];
+          }
           for (rr = 0; rr < issues.length; rr += 1) {
             addToCorrectColumn(issues[rr], mydata.columns, data);
           }
