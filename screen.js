@@ -31,17 +31,20 @@ define(['jquery', 'boards/data-loader', 'require', './admin', './jira-api'], fun
         }
         return url;
       },
-      getCard = function (issue) {
+      getCard = function (issue, data) {
         var card = {};
         card.summary = issue.fields.summary;
         if (issue.fields.assignee) {
           card.userIcon = issue.fields.assignee.avatarUrls['48x48'];
+          if (card.userIcon) {
+            card.userIcon = addCredentials(card.userIcon, data.username, data.password);
+          }
           card.assignee = issue.fields.assignee.displayName.split(' ')[0];
         }
         return card;
       },
-      addToCorrectColumn = function (issue, columns) {
-        var ii, card = getCard(issue);
+      addToCorrectColumn = function (issue, columns, data) {
+        var ii, card = getCard(issue, data);
         for (ii = 0; ii < columns.length; ii += 1) {
           if (issue.fields.status.name === columns[ii].statuses) {
             if (!columns[ii].cards) {
@@ -50,6 +53,26 @@ define(['jquery', 'boards/data-loader', 'require', './admin', './jira-api'], fun
             columns[ii].cards.push(card);
             break;
           }
+        }
+      },
+      checkLimits = function (mydata) {
+        var rr, cc, imax, imin;
+        for (rr = 0; rr < mydata.columns.length; rr += 1) {
+          cc = 0;
+          imax = parseInt(mydata.columns[rr].max, 10);
+          imin = parseInt(mydata.columns[rr].min, 10);
+          if (mydata.columns[rr].cards) {
+            cc = mydata.columns[rr].cards.length;
+          }
+          if (imax === imax && cc > imax) {
+            mydata.columns[rr].status = 'violate-max';
+            continue;
+          }
+          if (imin === imin && cc < imin) {
+            mydata.columns[rr].status = 'violate-min';
+            continue;
+          }
+          mydata.columns[rr].status = 'ok';
         }
       },
       getColumns = function (loader, data) {
@@ -68,9 +91,9 @@ define(['jquery', 'boards/data-loader', 'require', './admin', './jira-api'], fun
         return jiraApi.useFilter(data.filterId).then(function (issues) {
           var rr;
           for (rr = 0; rr < issues.length; rr += 1) {
-            
-            addToCorrectColumn(issues[rr], mydata.columns);
+            addToCorrectColumn(issues[rr], mydata.columns, data);
           }
+          checkLimits(mydata);
           return mydata;
         });
 

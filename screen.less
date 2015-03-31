@@ -2,7 +2,7 @@
   height: 100%;
   margin-right: 0;
   margin-left: 0;
-  font-size: 48px;
+  font-size: 36px;
 
   .jira-kanban-board {
   	height: 100%;
@@ -15,6 +15,14 @@
   	height: 100%;
   	background-color: #444;
 
+    &.status-violate-max {
+      background-color: #f00;
+    }
+
+    &.status-violate-min {
+      background-color: #fc0;
+    }
+
     ul, li {
       list-style: none;
       margin: 0;
@@ -22,9 +30,27 @@
     }
   }
 
-  .jira-kanban-board.column-count-3 .jira-kanban-column {
-  	width: 32%;
+  .jira-kanban-board.column-count-2 .jira-kanban-column {
+    width: 49%;
     margin-right: 2%;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  .jira-kanban-board.column-count-3 .jira-kanban-column {
+  	width: 32.5%;
+    margin-right: 1.25%;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  .jira-kanban-board.column-count-4 .jira-kanban-column {
+    width: 24.25%;
+    margin-right: 1%;
 
     &:last-child {
       margin-right: 0;
@@ -50,7 +76,8 @@
       height: 100%;
       width: 0.7em;
       background-color: #aaa;
-      
+      overflow: hidden;
+
       img {
         position: absolute;
         top: 0;
@@ -68,7 +95,7 @@
         cursor: vertical-text;
         display: block;
         line-height: 0.7;
-        font-size: 39px;
+        font-size: 32px;
         text-transform: uppercase;
       }
     }
